@@ -1,42 +1,54 @@
-#Entrada de datos:
-
-lista_productos = []
+Inventario = {}
 cantidad = []
-
-while True:
-    nombre_product = input("Ingresa el nombre del producto: ")
-    while True:
-        try:
-            precio = float(input("Ingresa el precio del preducto: "))
-            break
-        except ValueError:
-                print("Valor ingresado de manera incorrecta, ingresalo de nuevo")
-    while True:
-        try:
-            cantidad = int(input("Ingresa la cantidad del preducto: "))
-            break
-        except ValueError:
-            print("Ingresaste una cantidad erronea, hazlo de nuevo: ")
-    break
 #Funciones.
+def añadir_producto():
+    #Entrada de datos:
+    while True:
+        nombre_product = input("Ingresa el nombre del producto: ")
+        while True:
+            try:
+                precio = float(input("Ingresa el precio del preducto: "))
+                break
+            except ValueError:
+                    print("Valor ingresado de manera incorrecta, ingresalo de nuevo")
+        while True:
+            try:
+                cantidad = int(input("Ingresa la cantidad del preducto: "))
+                break
+            except ValueError:
+                print("Ingresaste una cantidad erronea, hazlo de nuevo: ")
+        break
+    Inventario[nombre_product] = [precio, cantidad]
 
-def añadir_producto(lista_productos,nombre_product, precio, cantidad):
-     productos = {"nombre": nombre_product, "precio": precio, "cantidad": cantidad}
-     lista_productos.append(productos)
 
-def buscar_producto(lista_producto):
-    lista = lista_producto
-    print(lista)
-    valor = input("Ingresa el producto que deseas buscar: ")
+def buscar_producto():
+    lista = Inventario
+    #print(lista)
+    producto = input("Ingresa el producto que deseas buscar: ")
     if lista:
-        print(f"Producto {valor} encontrado")
-        return print(f"Su producto {valor} fue encontrado, tiene un precio de {precio} y su cantidad es de {cantidad}")
-        
+        print(f"Producto {producto} encontrado")
+        return print(f"Su producto {producto} fue encontrado, su precio es de {lista[producto][0]} pesos.\nCantidad disponible es de {lista[producto][1]}")
     else:
-         print("Producto no encontrado.")
+         print(f"{producto} no se encuentra en el inventario.")
 
-print(añadir_producto(lista_productos, nombre_product, precio, cantidad))
-print(buscar_producto(lista_productos))
+def new_price():
+    lista = Inventario
+    name_product = input("Ingresa nombre del producto al que quieres actualizar su precio: ")
+    for producto in lista:
+        if producto == name_product:
+            print(f"Excelente, {name_product} tiene un precio actual de: {lista[name_product][0]}")
+            new_price = int(input(f"Ingresa el nuevo valor de {name_product}: "))
+            lista[producto][0] = new_price
+            nuevo = lista[producto][0]
+            return nuevo
+        else:
+            print("No se encontro el producto.")
+
+
+    
+print(añadir_producto())
+print(new_price())
+print(buscar_producto())
 
 
 
